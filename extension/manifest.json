@@ -2,8 +2,8 @@
   "manifest_version": 3,
   "name": "Supabase Keep Alive",
   "version": "1.1",
-  "description": "Keep your Supabase free-tier projects active by automatically pinging them at regular intervals. Prevents automatic pausing after 7 days of inactivity. Simple, secure, and privacy-focused.",
-  "permissions": ["storage", "alarms", "tabs"],
+  "description": "Keep your Supabase free-tier projects active by automatically pinging them. Prevents pausing after 7 days of inactivity.",
+  "permissions": ["storage", "alarms"],
   "host_permissions": ["https://*.supabase.co/*", "https://*/*/*"],
   "background": {
     "service_worker": "background.js"
