@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supabase Keep Alive - Settings</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+            font-family: monospace;
+        }
+        
+        button {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #059669;
+        }
+        
+        button.secondary {
+            background-color: #6b7280;
+        }
+        
+        button.secondary:hover {
+            background-color: #4b5563;
+        }
+        
+        button.coffee {
+            background-color: #FFDD44;
+            color: #333;
+        }
+        
+        button.coffee:hover {
+            background-color: #FFD700;
+        }
+        
+        .url-item {
+            display: grid;
+            grid-template-columns: 150px 1fr 200px auto;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: start;
+        }
+        
+        .url-item input[type="text"], .url-item input[type="password"] {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        
+        .url-item input.invalid {
+            border-color: #ef4444;
+            background-color: #fef2f2;
+        }
+        
+        .url-item input.valid {
+            border-color: #10b981;
+            background-color: #f0f9ff;
+        }
+        
+        .url-validation-message {
+            font-size: 12px;
+            margin-top: 2px;
+            grid-column: span 4;
+        }
+        
+        .validation-error {
+            color: #ef4444;
+        }
+        
+        .validation-success {
+            color: #10b981;
+        }
+        
+        .icon {
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+        
+        .icon-sm {
+            width: 14px;
+            height: 14px;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .url-item button {
+            flex: 0 0 auto;
+            padding: 8px 12px;
+            margin: 0;
+            background-color: #ef4444;
+            font-size: 12px;
+        }
+        
+        .url-item button:hover {
+            background-color: #dc2626;
+        }
+        
+        .status-message {
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        .status-success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .status-error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+        
+        .help-text {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 5px;
+        }
+        
+        .toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .toggle input[type="checkbox"] {
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Supabase Keep Alive Settings</h1>
+        
+        <div class="section">
+            <h2>Extension Status</h2>
+            <div class="toggle">
+                <input type="checkbox" id="enabled">
+                <label for="enabled">Enable automatic keep-alive pings</label>
+            </div>
+            <div class="help-text">
+                When enabled, the extension will automatically ping your Supabase URLs at the specified interval.
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Ping Interval</h2>
+            <label for="pingInterval">How often to ping:</label>
+            <select id="pingInterval">
+                <option value="60">1 hour</option>
+                <option value="360">6 hours</option>
+                <option value="720">12 hours</option>
+                <option value="1440">24 hours</option>
+                <option value="4320">3 days</option>
+                <option value="10080">1 week</option>
+            </select>
+            <div class="help-text">
+                Supabase free projects pause after 7 days of inactivity. Pinging every 24 hours is usually sufficient.
+            </div>
+        </div>
+        
+        
+        <div class="section">
+            <h2>Supabase Project URLs</h2>
+            <div id="urlList">
+                <!-- URLs will be added here dynamically -->
+            </div>
+            <button type="button" id="addUrl">+ Add URL</button>
+            <div class="help-text">
+                Add your Supabase project REST API URLs. Example: https://your-project.supabase.co/rest/v1/users
+                <br>You can add a custom name for each URL and an optional <strong>anon key</strong> if authentication is required.
+                <br>Each URL can have its own Supabase anon key. Find your anon key in: Supabase Dashboard → Settings → API → Project API keys → anon/public.
+                <br><strong>Tip:</strong> Use specific endpoints like /users or /posts to ensure real API activity.
+            </div>
+        </div>
+        
+        <div class="section">
+            <button type="button" id="save">
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
+                </svg>
+                Save Settings
+            </button>
+            <button type="button" id="pingNow" class="secondary">
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                </svg>
+                Test Ping Now
+            </button>
+            <button type="button" id="buyMeCoffee" class="coffee">
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                </svg>
+                Buy Me a Coffee
+            </button>
+            <div id="status"></div>
+        </div>
+        
+        <div class="section">
+            <h2>Last Ping Results</h2>
+            <div id="lastResults">
+                <p class="help-text">No ping results available yet.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Privacy & Security</h2>
+            <div class="help-text">
+                <strong>
+                    <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="margin-right: 4px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                    Your privacy is protected:
+                </strong>
+                <br>• No data collection, tracking, or analytics
+                <br>• All settings stored locally on your device only
+                <br>• Supabase anon keys encrypted in Chrome's secure storage
+                <br>• Network requests sent only to your configured URLs
+                <br>• Open source - verify the code yourself
+                <br><br>
+                <strong>Extension Version:</strong> 1.1 | 
+                <strong>Last Updated:</strong> January 2025
+                <br><br>
+                <div style="text-align: center; padding: 10px; border-top: 1px solid #e5e7eb; margin-top: 15px;">
+                    <button type="button" id="openGitHub" class="secondary" style="margin-right: 10px;">
+                        <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        View on GitHub
+                    </button>
+                    <small style="color: #6b7280;">
+                        Made with ❤️ by <a href="https://github.com/josphatmuteru" target="_blank" style="color: #3b82f6; text-decoration: none;">Josphat Muteru</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="options.js"></script>
+</body>
+</html>
