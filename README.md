@@ -6,6 +6,8 @@
 
 A Chrome extension that prevents your Supabase free-tier projects from automatically pausing after 7 days of inactivity by sending periodic keep-alive pings.
 
+[Chrome web store link](https://chromewebstore.google.com/detail/supabase-keep-alive/fblgjapnnnbmcegmgapkbfgaejfhplhn)
+
 ## 🎯 Why This Extension?
 
 Supabase free-tier projects pause after **7 days of inactivity**. This extension keeps your projects alive by:
